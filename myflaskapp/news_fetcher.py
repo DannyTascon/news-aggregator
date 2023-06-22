@@ -1,7 +1,7 @@
 import feedparser
 from datetime import datetime
 from dateutil.parser import parse
-from myflaskapp import db, create_app  # import your db instance and your application factory function
+from . import db, create_app# import your db instance and your application factory function
 from myflaskapp.models import Article, Source  # import your models
 
 def fetch_news(rss_url):
@@ -12,24 +12,23 @@ def fetch_news(rss_url):
     
     if rss_feed.entries:
         print(f"First entry title: {rss_feed.entries[0].title}")
+        published = rss_feed.entries[0].get('published')
+        
+        if published is None:
+            published = datetime.now()
+        else:
+            published = parse(published)
 
-    if rss_feed.entries:
         return {
             "title": rss_feed.entries[0].title,
             "link": rss_feed.entries[0].link,
-            "published": parse(rss_feed.entries[0].published)  # parsing the string to datetime object
+            "published": published
         }
 
 rss_urls = [
-    "https://news.yahoo.com/rss/",
     "https://news.google.com/news/rss",
     "https://www.huffingtonpost.com/section/front-page/feed",
     "http://rss.cnn.com/rss/edition.rss",
-    "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-    "http://feeds.foxnews.com/foxnews/latest",
-    "http://feeds.nbcnews.com/nbcnews/public/home",
-    "http://feeds.washingtonpost.com/rss/national",
-    "http://feeds.abcnews.com/abcnews/topstories"
 ]
 
 # Run this script only when this file is directly run, not when it is imported
@@ -60,6 +59,7 @@ if __name__ == "__main__":
             print(f"Title: {article.title}")
             print(f"Link: {article.link}")
             print(f"Published: {article.posted_timestamp}")
+
 
 
 

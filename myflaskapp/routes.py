@@ -34,3 +34,14 @@ def get_article(article_id):
     if article is None:
         abort(404, description="Article not found")
     return render_template('article.html', article=article)
+
+# ... existing code ...
+
+@routes.route('/articles')
+def articles():
+    # Fetch all articles from the database
+    articles = Article.query.all()
+
+    # Render the articles template and pass the articles to it
+    return render_template('articles.html', articles=articles)
+

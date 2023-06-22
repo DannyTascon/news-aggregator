@@ -16,7 +16,3 @@ def load_user(user_id):
 @app.route('/')
 def home():
     return "Hello, world!"
-
-
-
-

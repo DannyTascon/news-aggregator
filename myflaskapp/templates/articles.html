@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>{{ article.title }}</title>
+    <title>News Articles</title>
 </head>
 <body>
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.description }}</p>
-    <p>Published at: {{ article.posted_timestamp }}</p>
-    <p><a href="{{ article.link }}">Read more</a></p>
-    <p>Source: {{ article.source.name }}</p>
+    <h1>News Articles</h1>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.posted_timestamp }}</p>
+                <a href="{{ url_for('routes.get_article', article_id=article.id) }}">Read more</a>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
