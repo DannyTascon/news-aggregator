@@ -1,7 +1,7 @@
 import feedparser
 from datetime import datetime
 from dateutil.parser import parse
-from . import db, create_app# import your db instance and your application factory function
+from . import db, create_app  # import your db instance and your application factory function
 from myflaskapp.models import Article, Source  # import your models
 
 def fetch_news(rss_url):
@@ -43,14 +43,18 @@ if __name__ == "__main__":
                 if not source:
                     source = Source(name=url.split('//')[1].split('/')[0], rss_feed_url=url)
                     db.session.add(source)
-                # Add the new article
-                article = Article(
-                    title=article_data['title'],
-                    link=article_data['link'],
-                    posted_timestamp=article_data['published'],
-                    source=source
-                )
-                db.session.add(article)
+                    
+                # Check if the article already exists in the database
+                existing_article = Article.query.filter_by(title=article_data['title']).first()
+                if not existing_article:
+                    # Add the new article
+                    article = Article(
+                        title=article_data['title'],
+                        link=article_data['link'],
+                        posted_timestamp=article_data['published'],
+                        source=source
+                    )
+                    db.session.add(article)
         db.session.commit()  # commit the changes to the database
 
         # Print all articles

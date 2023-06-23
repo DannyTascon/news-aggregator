@@ -4,8 +4,10 @@ from . import db
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True)
+    username = db.Column(db.String(64), unique=True) 
+    email = db.Column(db.String(120), nullable=False)
     password_hash = db.Column(db.String(128))
+    __table_args__ = (db.UniqueConstraint('email', name='uix_1'), )
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -27,5 +29,6 @@ class Source(db.Model):
     name = db.Column(db.String(100))
     rss_feed_url = db.Column(db.String(500))
     articles = db.relationship('Article', backref='source', lazy=True)
+
 
 

@@ -1,4 +1,3 @@
-# __init__.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -18,7 +17,7 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
-    Migrate(app, db)  # Initialize Flask-Migrate here
+    Migrate(app, db)  # Initialize Flask-Migrate here without assigning it to a variable
     login_manager.user_loader(load_user)
 
     with app.app_context():
