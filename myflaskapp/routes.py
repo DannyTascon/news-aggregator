@@ -45,3 +45,33 @@ def articles():
     # Render the articles template and pass the articles to it
     return render_template('articles.html', articles=articles)
 
+# New routes
+
+@routes.route('/register')
+def register():
+    return render_template('register.html')
+
+@routes.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@routes.route('/about')
+def about():
+    return render_template('about.html')
+
+@routes.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@routes.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
+
+@routes.errorhandler(500)
+def internal_server_error(e):
+    # note that we set the 500 status explicitly
+    return render_template('500.html'), 500
+
+
+
