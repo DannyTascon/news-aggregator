@@ -1,7 +1,7 @@
 import feedparser
 from datetime import datetime
 from dateutil.parser import parse
-from . import db, create_app  # import your db instance and your application factory function
+from myflaskapp import db, create_app  # import your db instance and your application factory function
 from myflaskapp.models import Article, Source  # import your models
 
 def fetch_news(rss_url):
@@ -63,6 +63,7 @@ if __name__ == "__main__":
             print(f"Title: {article.title}")
             print(f"Link: {article.link}")
             print(f"Published: {article.posted_timestamp}")
+
 
 
 

@@ -2,6 +2,9 @@
 from flask import Blueprint, render_template, redirect, url_for, request, abort
 from flask_login import login_user, logout_user, login_required
 from .models import User, Article
+from .forms import SubmitArticleForm
+from . import db
+
 
 routes = Blueprint('routes', __name__)
 
@@ -34,8 +37,6 @@ def get_article(article_id):
     if article is None:
         abort(404, description="Article not found")
     return render_template('article.html', article=article)
-
-# ... existing code ...
 
 @routes.route('/articles')
 def articles():
@@ -72,6 +73,22 @@ def page_not_found(e):
 def internal_server_error(e):
     # note that we set the 500 status explicitly
     return render_template('500.html'), 500
+
+@routes.route('/submit_article', methods=['GET', 'POST'])
+@login_required
+def submit_article():
+    form = SubmitArticleForm()
+    if form.validate_on_submit():
+        new_article = Article(
+            title=form.title.data,
+            link=form.link.data,
+            description=form.description.data,
+            category=form.category.data
+        )
+        db.session.add(new_article)
+        db.session.commit()
+        return redirect(url_for('routes.home'))  # Redirect to home page after successful submission
+    return render_template('submit_article.html', form=form)
 
 
 

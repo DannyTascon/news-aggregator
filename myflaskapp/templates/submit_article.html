@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Article</title>
+</head>
+<body>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=30) }}
+        </p>
+        <p>
+            {{ form.link.label }}<br>
+            {{ form.link(size=30) }}
+        </p>
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description(cols=30, rows=4) }}
+        </p>
+        <p>
+            {{ form.category.label }}<br>
+            {{ form.category(size=30) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>

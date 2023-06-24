@@ -23,10 +23,22 @@ def create_app():
     with app.app_context():
         db.create_all()  # create all database tables
 
+    print(app.url_map)  # print all registered routes
+
+    from .api import api_bp  # import the Blueprint instance
+    app.register_blueprint(api_bp, url_prefix='/api')  # register the Blueprint instance with url prefix /api
+    print(app.url_map)  # print all registered routes
+
     from .routes import routes as routes_blueprint
     app.register_blueprint(routes_blueprint)
+    print(app.url_map)  # print all registered routes again
 
     return app
+
+
+
+
+
 
 
 
