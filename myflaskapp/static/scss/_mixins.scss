@@ -1,0 +1,11 @@
+// _mixins.scss
+
+@mixin center-absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  // Define other mixins...
+  

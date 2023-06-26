@@ -6,6 +6,7 @@ from . import db
 from werkzeug.utils import secure_filename
 import os
 from .forms import SettingsForm
+from flask import jsonify
 
 
 routes = Blueprint('routes', __name__)
@@ -171,15 +172,16 @@ def search():
         # Perform the search query on your database
         search_results = perform_search(search_query)
 
-        return render_template('search.html', form=form, search_results=search_results)
+        return render_template('search.html', form=form, search_results=search_results, user=current_user)
 
-    return render_template('search.html', form=form)
+    return render_template('search.html', form=form, user=current_user)
 
 def perform_search(search_query):
     # Perform the necessary database query to retrieve search results
     # based on the search query
     search_results = Article.query.filter(Article.title.ilike(f"%{search_query}%")).all()
     return search_results
+
 
 @routes.route('/settings', methods=['GET', 'POST'])
 @login_required
@@ -209,6 +211,14 @@ def settings():
     form.bio.data = current_user.bio
 
     return render_template('settings.html', title='Account Settings', form=form)
+
+@routes.route('/test_db')
+def test_db():
+    try:
+        users = User.query.all()
+        return jsonify({'users': [str(user) for user in users]}), 200  # A list of string representations of User objects
+    except Exception as e:
+        return str(e), 500
 
 
 

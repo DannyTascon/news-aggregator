@@ -1,0 +1,64 @@
+// forms.scss
+
+// Import global styles
+@import 'global';
+
+// Form Styles
+.form {
+  margin-bottom: $spacing-unit * 2;
+}
+
+.form-group {
+  margin-bottom: $spacing-unit;
+
+  &.has-error {
+    .form-control {
+      border-color: $error-color;
+    }
+    .form-text {
+      color: $error-color;
+    }
+  }
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: $spacing-unit;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: $spacing-unit;
+  font-size: $font-size-base;
+  border: 1px solid $gray-color;
+  border-radius: $border-radius;
+  transition: border-color 0.3s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+.form-text {
+  margin-top: 0.5rem;
+  font-size: $font-size-small;
+  color: $gray-color;
+}
+
+.form-button {
+  padding: $spacing-unit;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+
+

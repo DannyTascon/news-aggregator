@@ -11,9 +11,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True) 
     email = db.Column(db.String(120), nullable=False)
     password_hash = db.Column(db.String(128))
-    bio = db.Column(db.Text, nullable=True)  # New field for biography
-    profile_picture = db.Column(db.String(120), nullable=True)  # New field for profile picture
-    role = db.Column(db.String(20), default='user')  # New field for user role with a default value
+    # bio = db.Column(db.Text, nullable=True)  # Comment out or delete this line
+    # profile_picture = db.Column(db.String(120), nullable=True)
+    role = db.Column(db.String(20), default='user')
     __table_args__ = (db.UniqueConstraint('email', name='uix_1'), )
 
     def set_password(self, password):
@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])

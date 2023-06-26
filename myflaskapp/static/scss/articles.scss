@@ -1,0 +1,84 @@
+// articles.scss
+
+// Import global styles
+@import 'global';
+
+// Import shared component styles
+@import 'buttons';
+@import 'forms';
+
+// Page-specific styles
+.articles {
+  // Define styles for the articles page elements
+  .article-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-unit * 2;
+
+    .article-card {
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      padding: $spacing-unit;
+
+      // Styles for article card elements
+      .title {
+        font-weight: bold;
+        font-size: $font-size-medium;
+      }
+
+      .description {
+        color: $text-color-light;
+      }
+
+      .category {
+        font-style: italic;
+        color: $text-color-secondary;
+      }
+
+      .read-more-button {
+        margin-top: $spacing-unit;
+      }
+    }
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-unit * 2;
+
+    .search-input {
+      flex-grow: 1;
+      padding: $spacing-unit;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+    }
+
+    .search-button {
+      margin-left: $spacing-unit;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: $spacing-unit * 2;
+
+    .page-link {
+      padding: $spacing-unit;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      margin: 0 $spacing-unit / 2;
+
+      &.active {
+        background-color: $primary-color;
+        color: white;
+      }
+
+      &:hover {
+        background-color: $primary-color-light;
+        color: white;
+      }
+    }
+  }
+}

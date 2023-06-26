@@ -1,0 +1,44 @@
+// home.scss
+
+// Import global styles
+@import 'global';
+
+// Import shared component styles
+@import 'buttons';
+@import 'forms';
+
+// Page-specific styles
+.home {
+  // Define styles for the home page elements
+  .banner {
+    background-color: $primary-color;
+    color: white;
+    padding: $spacing-unit * 2;
+    border-radius: $border-radius;
+  }
+
+  .featured-articles {
+    margin-top: $spacing-unit * 2;
+
+    .article-card {
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      padding: $spacing-unit;
+      margin-bottom: $spacing-unit;
+
+      // Styles for article card elements
+      .title {
+        font-weight: bold;
+        font-size: $font-size-large;
+      }
+
+      .description {
+        color: $text-color-light;
+      }
+
+      .read-more-button {
+        margin-top: $spacing-unit;
+      }
+    }
+  }
+}

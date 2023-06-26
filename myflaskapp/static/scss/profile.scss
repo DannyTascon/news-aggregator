@@ -1,0 +1,78 @@
+// Import global styles
+@import 'global';
+
+// Import shared component styles
+@import 'forms';
+
+// Variables
+$primary-color: #007bff;
+$text-color: #333;
+$font-size-medium: 16px;
+$spacing-unit: 10px;
+
+// Profile Styles
+.profile {
+  // Profile card
+  .profile-card {
+    display: flex;
+    align-items: center;
+    gap: $spacing-unit * 2;
+
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profile-info {
+      .username {
+        font-weight: bold;
+        font-size: $font-size-medium;
+      }
+
+      .bio {
+        margin-top: $spacing-unit;
+        color: $text-color;
+      }
+    }
+  }
+
+  // Update profile form
+  .update-profile-form {
+    .bio {
+      height: 150px;
+    }
+
+    .profile-picture-input {
+      margin-top: $spacing-unit;
+    }
+
+    .submit-button {
+      margin-top: $spacing-unit * 2;
+    }
+  }
+}
+
+// Additional Styles
+.profile {
+  // Add hover effect to profile picture
+  .profile-picture {
+    transition: opacity 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  // Add hover effect to buttons
+  .submit-button,
+  .cancel-button {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}

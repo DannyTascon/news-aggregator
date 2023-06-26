@@ -1,0 +1,42 @@
+@import 'global';
+
+// Header
+header {
+    background-color: $primary-color;
+    color: white;
+    padding: $spacing-unit;
+  }
+  
+  // Footer
+  footer {
+    background-color: $secondary-color;
+    color: white;
+    padding: $spacing-unit;
+  }
+  
+  // Navigation
+  nav {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  
+      li {
+        display: inline-block;
+        margin-right: $spacing-unit;
+  
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+  
+  // Sidebars
+  .sidebar {
+    background-color: #f1f1f1;
+    padding: $spacing-unit;
+  }
+  
+  // Add more layout styles as needed...
+  

@@ -1,0 +1,27 @@
+// Colors
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$warning-color: #ffc107;
+
+// Fonts
+$base-font: Arial, sans-serif;
+
+// Spacing
+$spacing-unit: 16px;
+
+// Global styles
+body {
+    font-family: $base-font;
+    color: $secondary-color;
+    background-color: #f8f9fa;
+  }
+  
+  a {
+    color: $primary-color;
+    text-decoration: none;
+  }
+  
+  // Add more global styles as needed...
+  

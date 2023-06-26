@@ -1,0 +1,45 @@
+// Import other SCSS files if needed
+@import 'cards';
+
+// Styles for card container
+.card {
+  // Add your styles for the card container here
+  // For example:
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  
+  &-header {
+    // Styles for card header
+    // For example:
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &-body {
+    // Styles for card body
+    // For example:
+    padding: 10px;
+
+    .title {
+      // Styles for title within card body
+      // For example:
+      color: #333;
+    }
+
+    .description {
+      // Styles for description within card body
+      // For example:
+      font-size: 14px;
+      color: #777;
+    }
+  }
+
+  &-footer {
+    // Styles for card footer
+    // For example:
+    background-color: #f5f5f5;
+    padding: 5px;
+    text-align: right;
+  }
+}

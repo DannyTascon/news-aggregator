@@ -6,21 +6,20 @@ from flask_bcrypt import Bcrypt
 from flask_assets import Environment, Bundle
 import os
 
-app = Flask(__name__)
-assets = Environment(app)
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
+    
     app.config['SECRET_KEY'] = 'SoccerBall2023!!'  # Add this line with your own secret key
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///D:\\Projects\\Max\\news_aggregator_web_app\\news-aggregator\\myflaskapp\\app.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Initialize Flask-Assets
+    # Initialize Flask-Assets within create_app
     assets = Environment(app)
-
+    
     # Append the SCSS directory to the assets path
     assets.append_path(os.path.join(os.path.dirname(__file__), 'static'))
 
@@ -29,6 +28,7 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
+    bcrypt.init_app(app)
     Migrate(app, db)  # Initialize Flask-Migrate here without assigning it to a variable
 
     with app.app_context():
@@ -50,6 +50,7 @@ def create_app():
 def load_user(user_id):
     from .models import User  # Import here to avoid circular import
     return User.query.get(int(user_id))
+
 
 
 
