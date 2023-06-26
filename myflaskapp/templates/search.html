@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Search</h1>
+    <form action="{{ url_for('routes.search') }}" method="POST">
+      <div class="form-group">
+        <input type="text" name="search_query" class="form-control" placeholder="Enter your search query">
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if search_results %}
+      <h2>Search Results</h2>
+      <ul class="list-group">
+        {% for result in search_results %}
+          <li class="list-group-item">{{ result.title }}</li>
+        {% endfor %}
+      </ul>
+      <!-- Pagination links can be added here -->
+    {% endif %}
+  </div>
+{% endblock %}

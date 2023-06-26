@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, FileField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL, FileAllowed
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL
 from .models import User
 
 class RegistrationForm(FlaskForm):
@@ -29,8 +29,26 @@ class SubmitArticleForm(FlaskForm):
 
 class UpdateProfileForm(FlaskForm):
     bio = TextAreaField('Bio', validators=[Length(max=300)])
-    profile_picture = FileField('Profile Picture', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    profile_picture = FileField('Profile Picture')
     submit = SubmitField('Update')
+
+class SearchForm(FlaskForm):
+    search_query = StringField('Search', validators=[DataRequired()])
+    submit = SubmitField('Search')
+
+class SettingsForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    new_password = PasswordField('New Password', validators=[Length(min=8)])
+    confirm_password = PasswordField('Confirm Password', validators=[EqualTo('new_password')])
+    bio = TextAreaField('Bio', validators=[Length(max=300)])
+    profile_picture = FileField('Profile Picture')
+    submit = SubmitField('Update')
+
+
+
+
+
 
 
 

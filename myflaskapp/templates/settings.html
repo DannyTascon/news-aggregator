@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Account Settings</h1>
+
+  <form method="POST" action="{{ url_for('routes.update_settings') }}" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      {{ form.username(class="form-control") }}
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      {{ form.email(class="form-control") }}
+    </div>
+
+    <div class="form-group">
+      <label for="new_password">New Password</label>
+      {{ form.new_password(class="form-control") }}
+    </div>
+
+    <div class="form-group">
+      <label for="confirm_password">Confirm New Password</label>
+      {{ form.confirm_password(class="form-control") }}
+    </div>
+
+    <div class="form-group">
+      <label for="bio">Bio</label>
+      {{ form.bio(class="form-control") }}
+    </div>
+
+    <div class="form-group">
+      <label for="profile_picture">Profile Picture</label>
+      {{ form.profile_picture(class="form-control-file") }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+  </form>
+{% endblock %}

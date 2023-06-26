@@ -1,10 +1,12 @@
 from flask import Blueprint, render_template, redirect, url_for, request, abort, flash, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import User, Article
-from .forms import SubmitArticleForm, RegistrationForm, UpdateProfileForm
+from .forms import SubmitArticleForm, RegistrationForm, UpdateProfileForm, SearchForm
 from . import db
 from werkzeug.utils import secure_filename
 import os
+from .forms import SettingsForm
+
 
 routes = Blueprint('routes', __name__)
 
@@ -110,31 +112,11 @@ def submit_article():
             description=form.description.data,
             category=form.category.data
         )
-        db.session.add
 
-@routes.route('/profile/update', methods=['GET', 'POST'])
-@login_required
-def update_profile():
-    form = UpdateProfileForm()
-
-    if form.validate_on_submit():
-        current_user.bio = form.bio.data
-
-        if form.profile_picture.data:
-            # Save the uploaded file
-            filename = secure_filename(form.profile_picture.data.filename)
-            form.profile_picture.data.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            current_user.profile_picture = filename
-
+        db.session.add(new_article)
         db.session.commit()
-        flash('Your profile has been updated!', 'success')
-        return redirect(url_for('routes.profile'))
-
-    # Pre-fill the form fields with the current user's data
-    form.bio.data = current_user.bio
-
-    return render_template('update_profile.html', title='Update Profile', form=form)
-
+        return redirect(url_for('routes.home'))
+    return render_template('submit_article.html', form=form)
 
 @routes.route('/edit_article/<int:article_id>', methods=['GET', 'POST'])
 @login_required
@@ -177,6 +159,56 @@ def delete_article(article_id):
     db.session.commit()
     flash('Article has been deleted!', 'success')
     return redirect(url_for('routes.articles'))
+
+
+@routes.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+
+    if form.validate_on_submit():
+        search_query = form.search_query.data
+
+        # Perform the search query on your database
+        search_results = perform_search(search_query)
+
+        return render_template('search.html', form=form, search_results=search_results)
+
+    return render_template('search.html', form=form)
+
+def perform_search(search_query):
+    # Perform the necessary database query to retrieve search results
+    # based on the search query
+    search_results = Article.query.filter(Article.title.ilike(f"%{search_query}%")).all()
+    return search_results
+
+@routes.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    form = SettingsForm()
+
+    if form.validate_on_submit():
+        # Update the user's settings in the database
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.set_password(form.new_password.data)
+        current_user.bio = form.bio.data
+
+        if form.profile_picture.data:
+            # Save the uploaded profile picture
+            filename = secure_filename(form.profile_picture.data.filename)
+            form.profile_picture.data.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            current_user.profile_picture = filename
+
+        db.session.commit()
+        flash('Your settings have been updated!', 'success')
+        return redirect(url_for('routes.settings'))
+
+    # Pre-fill the form fields with the current user's data
+    form.username.data = current_user.username
+    form.email.data = current_user.email
+    form.bio.data = current_user.bio
+
+    return render_template('settings.html', title='Account Settings', form=form)
 
 
 
