@@ -49,7 +49,10 @@ class ArticleResource(Resource):
         db.session.commit()
         return {"message": "Article deleted."}, 204
 
-api.add_resource(ArticleListResource, '/api/articles')
-api.add_resource(ArticleResource, '/api/articles/<int:id>')
+# Removed '/api' from the paths
+api.add_resource(ArticleListResource, '/articles')
+api.add_resource(ArticleResource, '/articles/<int:id>')
+
+
 
 

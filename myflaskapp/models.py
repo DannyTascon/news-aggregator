@@ -7,6 +7,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True) 
     email = db.Column(db.String(120), nullable=False)
     password_hash = db.Column(db.String(128))
+    bio = db.Column(db.Text, nullable=True) # new field for biography
+    profile_picture = db.Column(db.String(120), nullable=True) # new field for profile picture
     __table_args__ = (db.UniqueConstraint('email', name='uix_1'), )
 
     def set_password(self, password):
@@ -14,6 +16,7 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
 
 class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -23,6 +26,18 @@ class Article(db.Model):
     description = db.Column(db.String(2000))
     source_id = db.Column(db.Integer, db.ForeignKey('source.id'))
     category = db.Column(db.String(200))
+
+    # Serialize method for Article
+    def serialize(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'link': self.link,
+            'posted_timestamp': self.posted_timestamp,
+            'description': self.description,
+            'source_id': self.source_id,
+            'category': self.category
+        }
 
 class Source(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
