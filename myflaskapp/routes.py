@@ -1,10 +1,8 @@
-# routes.py
 from flask import Blueprint, render_template, redirect, url_for, request, abort
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from .models import User, Article
-from .forms import SubmitArticleForm
-from . import db
-
+from .forms import SubmitArticleForm, RegistrationForm  # import the registration form
+from . import db, bcrypt  # make sure you have imported bcrypt in your __init__.py
 
 routes = Blueprint('routes', __name__)
 
@@ -14,12 +12,15 @@ def home():
 
 @routes.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('routes.home'))  # if the user is already logged in, redirect to home
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
         remember = request.form.get('remember')
         user = User.query.filter_by(username=username).first()
-        if user and user.check_password(password):
+        # check if user exists and the password is correct
+        if user and bcrypt.check_password_hash(user.password, password):
             login_user(user, remember=remember)
             return redirect(url_for('routes.home'))  # modified here
     return render_template('login.html')
@@ -46,11 +47,20 @@ def articles():
     # Render the articles template and pass the articles to it
     return render_template('articles.html', articles=articles)
 
-# New routes
 
-@routes.route('/register')
+@routes.route("/register", methods=['GET', 'POST'])  # added methods
 def register():
-    return render_template('register.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('routes.home'))  # if the user is already logged in, redirect to home
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('routes.login'))  # redirect user to login page after successful registration
+    return render_template('register.html', title='Register', form=form)
+
 
 @routes.route('/profile')
 def profile():
