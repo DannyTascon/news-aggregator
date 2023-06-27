@@ -1,0 +1,24 @@
+.card {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+.card-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+.card-body {
+  padding: 10px;
+}
+.card-body .title {
+  color: #333;
+}
+.card-body .description {
+  font-size: 14px;
+  color: #777;
+}
+.card-footer {
+  background-color: #f5f5f5;
+  padding: 5px;
+  text-align: right;
+}

@@ -1,0 +1,154 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.button.button-primary {
+  background-color: #007bff;
+  color: white;
+}
+.button.button-primary:hover {
+  background-color: #0062cc;
+}
+.button.button-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+.button.button-secondary:hover {
+  background-color: #545b62;
+}
+.button.button-success {
+  background-color: #28a745;
+  color: white;
+}
+.button.button-success:hover {
+  background-color: #1e7e34;
+}
+.button.button-danger {
+  background-color: #dc3545;
+  color: white;
+}
+.button.button-danger:hover {
+  background-color: #bd2130;
+}
+.button.button-disabled {
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form {
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group.has-error .form-control {
+  border-color: red;
+}
+.form-group.has-error .form-text {
+  color: red;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease-in-out;
+}
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-text {
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.form-button {
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form-button:hover {
+  background-color: #0062cc;
+}
+
+.home {
+  background-color: lightblue;
+}
+.home .banner {
+  background-color: #007bff;
+  color: white;
+  padding: 2rem;
+  border-radius: 4px;
+}
+.home .featured-articles {
+  margin-top: 2rem;
+}
+.home .featured-articles .article-card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.home .featured-articles .article-card .title {
+  font-weight: bold;
+  font-size: 20px;
+}
+.home .featured-articles .article-card .description {
+  color: #fff;
+}
+.home .featured-articles .article-card .read-more-button {
+  margin-top: 1rem;
+}

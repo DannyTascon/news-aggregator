@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 
+
 gulp.task('sass', function () {
   return gulp
     .src('myflaskapp/static/scss/**/*.scss')  // Adjust the path if necessary

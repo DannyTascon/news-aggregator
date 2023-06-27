@@ -2,6 +2,8 @@
 
 // Import global styles
 @import 'global';
+@import 'variables'; // Import the file where $error-color is defined
+@import 'variables'; // Import the file where $font-size-small is defined
 
 // Form Styles
 .form {

@@ -2,7 +2,7 @@
 
 // Import global styles
 @import 'global';
-
+@import '_variables';
 // Import shared component styles
 @import 'buttons';
 @import 'forms';
@@ -10,6 +10,8 @@
 // Page-specific styles
 .home {
   // Define styles for the home page elements
+  background-color: lightblue; // Add the desired background color here
+
   .banner {
     background-color: $primary-color;
     color: white;
@@ -42,3 +44,4 @@
     }
   }
 }
+
