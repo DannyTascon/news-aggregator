@@ -125,7 +125,13 @@ a {
 }
 
 .home {
-  background-color: lightblue;
+  height: 100vh; /* Adjust the height as needed */
+  padding-top: 40vh; /* Adjust the padding as needed */
+  overflow: hidden;
+  align-items: center;
+  text-align: center;
+  background-image: url("../static/background.jpg"); /* Update the path if needed */
+  background-size: cover;
 }
 .home .banner {
   background-color: #007bff;

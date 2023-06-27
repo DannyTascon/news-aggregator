@@ -1,5 +1,3 @@
-// home.scss
-
 // Import global styles
 @import 'global';
 @import '_variables';
@@ -9,8 +7,13 @@
 
 // Page-specific styles
 .home {
-  // Define styles for the home page elements
-  background-color: lightblue; // Add the desired background color here
+  height: 100vh; /* Adjust the height as needed */
+  padding-top: 40vh; /* Adjust the padding as needed */
+  overflow: hidden;
+  align-items: center;
+  text-align: center;
+  background-image: url('../static/background.jpg'); /* Update the path if needed */
+  background-size: cover;
 
   .banner {
     background-color: $primary-color;
@@ -28,7 +31,6 @@
       padding: $spacing-unit;
       margin-bottom: $spacing-unit;
 
-      // Styles for article card elements
       .title {
         font-weight: bold;
         font-size: $font-size-large;
@@ -44,4 +46,5 @@
     }
   }
 }
+
 
