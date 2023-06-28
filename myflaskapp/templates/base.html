@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Profile</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-  <!-- Add the following line to include the main CSS file -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
   <h1>Profile</h1>
 
   <h2>{{ user.username }}</h2>
@@ -17,6 +13,6 @@
   {% else %}
     <p>No profile picture available.</p>
   {% endif %}
-</body>
-</html>
+{% endblock %}
+
 
